@@ -3,21 +3,22 @@ import axios from 'axios'
 export default createStore({
     state:{
 
-        todolist:[]
+        todolist:[],
+        url:'http://localhost:3003/taskstodo'
 
     },
     mutations:{
         //getalltoto
-        getlist(state,alltodo)
+        GETLIST(state,alltodo)
         {
             state.todolist=alltodo
         }
         ,//addnewto
-        addnewtodo(state,newtodo){
+        ADDNEWTODO(state,newtodo){
             state.todolist.unshift(newtodo)
         },
         //completetodo
-        completetodo(state,todotocomplete){
+        COMPLTETETODO(state,todotocomplete){
             const indextodo=state.todolist.findIndex((todo)=>{todo.id==todotocomplete.id})
             if(indextodo!== -1)
             {
@@ -26,16 +27,28 @@ export default createStore({
                
         },
         //deletetodo
-        delete(state,id){
+        DELETETODO(state,id){
             this.state.todolist=state.todolist.filter((todo)=>{
                 todo.id!=id
             })
         }
-
-
-
     },
     actions:{
+    async getlist({commit}) {
+        try {
+           
+               const response=await axios.get(state.url)
+                commit('GETLIST',response.data)
+            }
+    
+            
+        catch (error) {
+            console.log(error)
+            
+        }
+    
+        }
+
         
 
     },

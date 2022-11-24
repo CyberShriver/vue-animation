@@ -1,16 +1,18 @@
 <template>
   <h3>Todo app</h3>
   <newtodoView />
+  <TodolistViewVue/>
   
 </template>
 
 <script>
 import newtodoView from './components/newtodoView.vue'
+import TodolistViewVue from './components/TodolistView.vue';
 
 export default {
   name: 'App',
   components: {
-    newtodoView
+    newtodoView,TodolistViewVue
   }
 }
 </script>

@@ -68,7 +68,7 @@ export default createStore({
         },
         async completetask({commit},updatetask){
             try {
-                const response=await axios.delete(`${this.state.url}/${updatetask.id}`,updatetask)
+                const response=await axios.patch(`${this.state.url}/${updatetask.id}`,updatetask)
                 commit('COMPLTETETODO',response.data)
                 
             } catch (error) {

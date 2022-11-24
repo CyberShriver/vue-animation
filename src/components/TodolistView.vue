@@ -7,7 +7,7 @@
                 <h3>{{data.name}},</h3>
                 <h3><span>done:</span><small v-if="data.done">yet</small><small v-if="!data.done">Not yet</small></h3>
                 <button class="btn-danger" @click="deletetask(data.id)">delete</button>
-                <button class="btn-primary" v-if="!data.done" @click="complete(data.id)">complete</button>   
+                <button class="btn-primary" v-if="!data.done" @click="complete(data)">complete</button>   
             </div>
             
 
@@ -24,14 +24,25 @@ import  {mapGetters,mapActions} from 'vuex'
 export default{
     data(){
         return{
-            newtasks:[]
+            newtasks:[],
+            
+            
+
         }
     },
     methods:{
        ...mapActions(["getalltodo","deletetask","completetask"]),
 
+    complete(alltask){
+        const updatetask={id:alltask.id,name:alltask.name,done:!alltask.done}
+        this.completetask(updatetask)
+
+    }
+
        
 
+       
+        
     },
         
     computed:{

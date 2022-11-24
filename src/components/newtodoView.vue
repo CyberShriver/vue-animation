@@ -37,14 +37,12 @@ export default{
     
 }
 </script>
-<style scoped>
+<style >
 
 button{
     background-color:cornflowerblue;
-    
     border: 0;
     padding: 10px 20px;
-    
     border-radius: 20px;
     color: white;
   

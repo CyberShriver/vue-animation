@@ -1,19 +1,19 @@
 {
   "taskstodo": [
     {
-      "name": "go to church",
-      "id": 1,
-      "done": true
-    },
-    {
       "name": "cook dinner",
-      "done": false,
+      "done": true,
       "id": 2
     },
     {
       "name": "visit",
       "done": false,
       "id": 3
+    },
+    {
+      "name": "nezone",
+      "done": true,
+      "id": 4
     }
   ]
 }

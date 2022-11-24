@@ -8,10 +8,9 @@
             <div class="list">
                 <h3><span>{{data.id}}</span></h3>
                 <h3><span>taskname:</span>{{data.name}},</h3>
-                <h3><span>done:</span><span v-if="data.done">yet</span><span v-if="!data.done" :class="notdone">Not yet</span></h3>
-                <button>delete</button>
-                <button>edit</button>
-                <button v-if="!data.done" @click="complete(data.id)">complete</button>   
+                <h3><span>done:</span><small v-if="data.done">yet</small><small v-if="!data.done">Not yet</small></h3>
+                <button class="btn-danger">delete</button>
+                <button class="btn-primary" v-if="!data.done" @click="complete(data.id)">complete</button>   
             </div>
             
 
@@ -30,9 +29,7 @@ export default{
         return{
 
             list:[],
-            taskname:'',
-            
-            
+            taskname:'',  
         }
 
     },
@@ -42,13 +39,10 @@ export default{
             const response = await axios.get(url);
 
         this.list = response.data;
-
-            
+ 
         } catch (error) {
             console.error(error);
-            
         }
-        
     },
     methods:{
         async addnewtask()
@@ -95,9 +89,7 @@ export default{
 
 .todolist{
    display: inline-block;
-   align-items: center;
-   
-   
+   align-items: center;  
 }
 
 .lists{
@@ -118,5 +110,21 @@ export default{
 }
 .notdone{
     background-color: brown;
+}
+.btn-primary{
+    background-color: blue;
+}
+.btn-danger{
+    background-color: brown;
+}
+button{
+    background-color: crimson;
+    
+    border: 0;
+    padding: 10px 20px;
+    
+    border-radius: 20px;
+    color: white;
+  
 }
 </style>

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "db:serve":"json-server --watch data/db.json --port=3003",
+    "db:serve": "json-server --watch data/db.json --port=3003",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"

@@ -36,18 +36,27 @@ export default createStore({
     actions:{
     async getlist({commit}) {
         try {
-           
-               const response=await axios.get(state.url)
-                commit('GETLIST',response.data)
-            }
-    
-            
-        catch (error) {
+           const response=await axios.get(state.url)
+            commit('GETLIST',response.data)
+        }catch (error) {
             console.log(error)
             
         }
     
+        },
+        async newtask({commit},newtodo){
+            try {
+                const response=await axios.post(state.url,{data:newtodo})
+                commit('ADDNEWTODO',response.data)
+
+                
+            } catch (error) {
+                console.log(error)
+                
+            }
         }
+    
+    
 
         
 

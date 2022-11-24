@@ -1,11 +1,12 @@
 <template>
     <h3>Task list</h3>
     <div class="lists" v-for="data of alltask" :key="data.id">
-            <div class="list">
+        
+            <div class="list" :class="{'completed':data.done}">
                 <h3><span>{{data.id}}</span></h3>
-                <h3><span>taskname:</span>{{data.name}},</h3>
+                <h3>{{data.name}},</h3>
                 <h3><span>done:</span><small v-if="data.done">yet</small><small v-if="!data.done">Not yet</small></h3>
-                <button class="btn-danger">delete</button>
+                <button class="btn-danger" @click="deletetask(data.id)">delete</button>
                 <button class="btn-primary" v-if="!data.done" @click="complete(data.id)">complete</button>   
             </div>
             
@@ -27,7 +28,9 @@ export default{
         }
     },
     methods:{
-       ...mapActions(["getalltodo","deletetask","completetask"])
+       ...mapActions(["getalltodo","deletetask","completetask"]),
+
+       
 
     },
         
@@ -54,10 +57,18 @@ export default{
     display: flex;
     justify-content:flex-start;
     gap: 30px;
-   align-items: center;
+    color: white;
+    overflow: hidden;
+   
+    align-items: center;
+     
+   background-color:green;
+   padding: 10px;
+   border: 0;
+   border-radius: 10px;
 }
-.notdone{
-    background-color: brown;
+.completed{
+    background-color:cornflowerblue;
 }
 .btn-primary{
     background-color: blue;
@@ -65,15 +76,15 @@ export default{
 .btn-danger{
     background-color: brown;
 }
-button{
-    background-color: crimson;
-    
-    border: 0;
-    padding: 10px 20px;
-    
-    border-radius: 20px;
-    color: white;
+
+
+.lists{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
   
+    
 }
 
 </style>

@@ -57,8 +57,8 @@ export default createStore({
         },
         async deletetask({commit},idtask){
             try {
-                await axios.delete(`${this.state.url}/${id}`)
-                commit('DELETETODO',id)
+                await axios.delete(`${this.state.url}/${idtask}`)
+                commit('DELETETODO',idtask)
 
                 
             } catch (error) {
@@ -68,10 +68,11 @@ export default createStore({
         },
         async completetask({commit},updatetask){
             try {
-                const response=await axios.delete(`${this.state.url}/${id}`,updatetask)
+                const response=await axios.delete(`${this.state.url}/${updatetask.id}`,updatetask)
                 commit('COMPLTETETODO',response.data)
                 
             } catch (error) {
+                console.log(error)
                 
             }
         }

@@ -1,92 +1,66 @@
 <template>
     <div class="todolist">
+        
         <form >
             <input type="text" v-model="taskname">
-            <button type="submit" @click="addnewtask">Add New one</button>
+            <button type="submit" @click="addtask">Add New task</button>
         </form>
     </div>
     
 </template>
 
 <script>
-import axios from 'axios'
-const url='http://localhost:3003/taskstodo'
+import { mapActions } from 'vuex';
+
 export default{
     
     data(){
         return{
+            taskname:''
 
-            list:[],
-            taskname:'',  
         }
 
     },
     
-    async created(){
-        try {
-            const response = await axios.get(url);
-
-        this.list = response.data;
- 
-        } catch (error) {
-            console.error(error);
-        }
-    },
     methods:{
-        async addnewtask()
-        {
-            try {
-               const res= await axios.post(url,{
-                name:this.taskname
-               
-            })
-            this.list = [...this.todos, res.data];
+        ...mapActions(['newtask']),
 
-            this.taskname= "";
-                
-            } catch (error) {
-                console.log(error)
-                
-            }
-        },
-        async complete(id) {
- try {
-    await axios.patch(`${url}/${id}`, {
-      done: true,
-    });
+        addtask(e){
+            e.preventDefault()
+            this.newtask(this.taskname)
+            this.taskname=''
 
-    this.list =this.list.map(todo => {
-      if (todo.id === id) {
-        todo.done = true;
-      }
+        }
 
-      return todo;
-    });
-  } catch (e) {
-    console.error(e);
-  }
-},
 
-        
-       
     }
     
 }
 </script>
-<style>
+<style scoped>
 
-.todolist{
-   display: inline-block;
-   align-items: center;  
+button{
+    background-color:cornflowerblue;
+    
+    border: 0;
+    padding: 10px 20px;
+    
+    border-radius: 20px;
+    color: white;
+  
 }
-
-.lists{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
-    margin-top: 40px;
-    background-color: aliceblue;
+form{
+    display: block;
+    
+}
+input
+{
+    display: inline-block;
+    width: 30%;
+    border-radius: 10px;
+    border-color: black;
+    position: relative;
+    padding: 3px;
     
 }
 </style>

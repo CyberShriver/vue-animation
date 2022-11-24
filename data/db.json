@@ -6,8 +6,14 @@
       "done": true
     },
     {
-      "name": "cook",
+      "name": "cook dinner",
+      "done": false,
       "id": 2
+    },
+    {
+      "name": "visit",
+      "done": false,
+      "id": 3
     }
   ]
 }

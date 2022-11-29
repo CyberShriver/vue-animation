@@ -5,7 +5,6 @@ export default createStore({
 
         todolist:[],
         url:'http://localhost:3003/taskstodo'
-
     },
     mutations:{
         //getalltoto

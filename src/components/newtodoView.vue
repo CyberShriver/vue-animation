@@ -2,13 +2,11 @@
     <div class="todolist">
         
         <form >
-            <input type="text" v-model="taskname">
-            <button type="submit" @click="addtask">Add New task</button>
+            <input type="text" v-model="taskname" aria-required="true">
+            <button  type="submit" @click="addtask">Add New task</button>
         </form>
-    </div>
-    
+    </div>    
 </template>
-
 <script>
 import { mapActions } from 'vuex';
 
@@ -37,13 +35,13 @@ export default{
     
 }
 </script>
-<style >
+<style scoped>
 
 button{
     background-color:cornflowerblue;
     border: 0;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 10px 10px;
+    border-radius: 10px;
     color: white;
   
 }

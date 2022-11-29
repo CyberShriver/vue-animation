@@ -3,12 +3,12 @@
     <div class="lists" v-for="data of alltask" :key="data.id">
         
             <div class="list" :class="{'completed':data.done}">
-                <h3><span>{{data.id}}</span></h3>
-                <h3>{{data.name}},</h3>
-                <h3><span>done:</span><small v-if="data.done">yet</small><small v-if="!data.done">Not yet</small></h3>
-                <button class="btn-danger" @click="deletetask(data.id)">delete</button>
-                <button class="btn-primary" v-if="!data.done" @click="complete(data)">complete</button>   
-            </div>
+                <h4>{{data.name}}</h4>
+            <div class="svg">
+               <font-awesome-icon icon="fa-solid fa-trash" class="trash" @click="deleteanytask(data.id)"/>
+               <font-awesome-icon icon="fa-solid fa-check" class="complete" v-if="!data.done" @click="complete(data)" />
+            </div>      
+    </div>
             
 
         </div>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
 
 import  {mapGetters,mapActions} from 'vuex'
 
@@ -34,8 +35,17 @@ export default{
        ...mapActions(["getalltodo","deletetask","completetask"]),
 
     complete(alltask){
-        const updatetask={id:alltask.id,name:alltask.name,done:!alltask.done}
+        const updatetask={id:alltask.id,name:alltask.name,done:true}
         this.completetask(updatetask)
+        this.getalltodo()
+        
+   
+
+
+    },
+    deleteanytask(idtask){
+        this.deletetask(idtask).then(this.getalltodo())
+        
 
     }
 
@@ -66,23 +76,37 @@ export default{
 .list{
     
     display: flex;
-    justify-content:flex-start;
-    gap: 30px;
+    justify-content:space-around;
+    gap: 20px;
+    align-items: center;
+    width: 40vh;
+    padding: 10px;
     color: white;
     overflow: hidden;
+ background-color:darkblue;
    
-    align-items: center;
-     
-   background-color:green;
-   padding: 10px;
-   border: 0;
    border-radius: 10px;
 }
-.completed{
-    background-color:cornflowerblue;
+svg{
+    padding-left: 20px;
+    font-size: 30px;
+    
 }
+.trash{
+    color: brown;
+}
+.complete{
+    color:bisque;
+}
+
+.completed{
+    background-color:cadetblue;
+}
+
 .btn-primary{
     background-color: blue;
+    
+
 }
 .btn-danger{
     background-color: brown;
@@ -91,10 +115,9 @@ export default{
 
 .lists{
     display: flex;
-    justify-content: center;
+    justify-content:flex-start;
     text-align: center;
-    margin-top: 40px;
-  
+    margin:10px 20px;
     
 }
 

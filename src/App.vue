@@ -9,6 +9,7 @@
 import newtodoView from './components/newtodoView.vue'
 import TodolistViewVue from './components/TodolistView.vue';
 
+
 export default {
   name: 'App',
   components: {

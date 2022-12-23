@@ -2,15 +2,10 @@
   <div class="about">
     <transition 
       appear
-      name="about"
       @before-enter="beforeEnter"
       @enter="enter"
-      @after-enter="afterEnter"
-      @before-leave="beforeLeave"
-      @leave="leave"
-      @after-leave="afterLeave"
      >
-      <h1 v-if="showTitle">About</h1>
+      <h1>About</h1>
     </transition>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum aperiam officia possimus delectus inventore quod quisquam culpa voluptas iusto, quae maiores quo dolorum, corporis laboriosam a dolore consequatur assumenda nam!</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum aperiam officia possimus delectus inventore quod quisquam culpa voluptas iusto, quae maiores quo dolorum, corporis laboriosam a dolore consequatur assumenda nam!</p>
@@ -20,41 +15,37 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import gsap from 'gsap'
 
 export default {
   setup() {
 
-     const showTitle=ref(true)
      
-      const beforeEnter=()=>{
+      const beforeEnter=(e)=>{
         console.log("before enter")
+        e.style.transform='translateY(-60px)'
+        e.style.opacity=0;
       }
-      const enter=()=>{
+      const enter=(e,done)=>{
         console.log(" enter")
+        gsap.to(e,{
+          duration:3,
+          y:0,
+          opacity:1,
+          ease:'bounce.out',
+          onComplete:done
+        })
+        
       }
       const afterEnter=(e)=>{
         console.log("after enter")
-        e.style.color="blue"
-        setTimeout(() => {
-          showTitle.value=false
-        }, 2000);
+        // gsap.to(e,{
+        //   color:blue
+        // })
 
       }
 
-      const beforeLeave=(e)=>{
-         e.style.color="pink"
-        console.log('before leave');
-      }
-
-      const leave=()=>{
-        console.log('leave');
-       
-      }
-      const afterLeave=()=>{
-        console.log('after leave');
-      }
-
-      return{beforeEnter,enter,afterEnter,showTitle,beforeLeave,leave,afterLeave}
+      return{beforeEnter,enter,afterEnter}
   }
 }
 </script>
@@ -67,10 +58,10 @@ export default {
 
   /* leave transition */
 
-  .about-enter-from,.about-leave-to{
+  /* .about-enter-from,.about-leave-to{
     opacity:0;
   }
   .about-enter-active,.about-leave-active{
     transition: opacity 3s ease;
-  }
+  } */
 </style>

@@ -1,4 +1,4 @@
-# todoapp
+# vue animation
 
 ## Project setup
 ```
